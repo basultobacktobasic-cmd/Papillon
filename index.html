@@ -32,6 +32,18 @@ ol{margin:6px 0 0;padding-left:20px;line-height:1.55;font-size:15px;color:#3a3a3
 .pie{margin-top:26px;color:#8e8e93;font-size:12.5px;text-align:center}
 </style>
 <script src="config.js"></script>
+<script>
+// Si se abre desde el ícono instalado: no se muestra la ficha, solo "Abriendo…" y se entra de inmediato.
+(function () {
+  var inst = false;
+  try { inst = window.matchMedia('(display-mode: standalone)').matches || window.matchMedia('(display-mode: minimal-ui)').matches || navigator.standalone === true; } catch (e) { }
+  if (!inst) return;
+  document.documentElement.className = 'inst';
+  var url = (window.PAPILLON_URL || '').trim();
+  if (/^https:\/\/script\.google\.com\/.+\/exec$/.test(url)) location.replace(url);
+})();
+</script>
+<style>html.inst body{background:#f7f9f8}html.inst .w{display:none}html.inst body:before{content:"Abriendo\2026";display:flex;align-items:center;justify-content:center;min-height:100vh;color:#14532d;font:700 16px -apple-system,'Segoe UI',Roboto,Arial,sans-serif}</style>
 </head><body><div class="w">
 <div class="cab">
   <img class="ico" src="icon-512.png" alt="Papillon">
